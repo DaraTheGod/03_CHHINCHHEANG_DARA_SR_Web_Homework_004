@@ -7,8 +7,8 @@ var tasks = [
 var nextId = 4;
 var editId = null;
 var deleteId = null;
-var selectedPriority = "Medium";
-var selectedStatus = "To Do";
+var selectedPriority = null;
+var selectedStatus = null;
 
 function renderTasks() {
   var list = document.getElementById("taskList");
@@ -45,12 +45,16 @@ function renderTasks() {
 
 function openAddModal() {
   editId = null;
+  selectedPriority = null;
+  selectedStatus = null;
   document.getElementById("taskInput").value = "";
   document.getElementById("modalTitle").textContent = "Add Task";
   document.getElementById("actionBtn").textContent = "Add";
   document.getElementById("cancelBtn").classList.add("hidden");
   document.getElementById("closeBtn").classList.remove("hidden");
   document.getElementById("modal").classList.remove("hidden");
+  updatePriorityButtons();
+  updateStatusButtons();
 }
 
 function openEditModal(id) {
@@ -83,6 +87,8 @@ function saveTask() {
     alert("Please enter a task name!");
     return;
   }
+  if (selectedPriority == null) selectedPriority = "Medium";
+  if (selectedStatus == null) selectedStatus = "To Do";
   if (editId != null) {
     for (var i = 0; i < tasks.length; i++) {
       if (tasks[i].id == editId) {
