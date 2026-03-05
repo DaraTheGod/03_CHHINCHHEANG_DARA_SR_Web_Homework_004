@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task List</title>
+  <link rel="stylesheet" href="output.css">
+  <style>
+    body {
+      background-color: #b2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="pl-[20%] pr-[20%] pt-[5%] pb-[5%]">
+
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-5xl font-black">Task List</h1>
+    <button onclick="openAddModal()" class="bg-purple-700 text-white font-bold px-6 py-3 rounded-full">
+      Add Task
+    </button>
+  </div>
+
+  <div class="bg-white rounded-3xl px-14 py-7 mb-8 flex justify-between">
+    <span class="text-cyan-400 font-extrabold text-2xl mr-[12%]">Task</span>
+    <span class="text-cyan-400 font-extrabold text-2xl">Priority</span>
+    <span class="text-cyan-400 font-extrabold text-2xl">Status</span>
+    <span class="text-yellow-500 font-extrabold text-2xl">Action</span>
+  </div>
+
+  <div id="taskList" class="flex flex-col gap-4"></div>
+  <div id="modal" class="hidden fixed inset-0 bg-[rgb(100,120,130)]/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-8 w-full max-w-lg shadow-xl">
+
+      <div class="flex justify-between items-center mb-6">
+        <h2 id="modalTitle" class="text-2xl font-bold">Add Task</h2>
+        <button id="closeBtn" onclick="closeModal()" class="border-2 border-gray-300 rounded-lg w-8 h-8 flex items-center justify-center text-gray-500">
+          X
+        </button>
+      </div>
+
+      <div class="mb-5">
+        <label class="block font-semibold mb-2">Task</label>
+        <input id="taskInput" type="text" placeholder="Web Homework"
+          class="w-full border-2 border-cyan-400 rounded-xl px-4 py-3 outline-none text-gray-700">
+      </div>
+
+      <div class="mb-5">
+        <label class="block font-semibold mb-3">Priority</label>
+        <div class="flex gap-3">
+          <button onclick="selectPriority('High')" id="btn-High"
+            class="border-2 border-red-500 text-red-500 rounded-2xl px-5 py-2 font-semibold">
+            High
+          </button>
+          <button onclick="selectPriority('Medium')" id="btn-Medium"
+            class="border-2 border-yellow-500 text-yellow-500 rounded-2xl px-5 py-2 font-semibold">
+            Medium
+          </button>
+          <button onclick="selectPriority('Low')" id="btn-Low"
+            class="border-2 border-green-500 text-green-500 rounded-2xl px-5 py-2 font-semibold">
+            Low
+          </button>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <label class="block font-semibold mb-3">Status</label>
+        <div class="flex gap-3">
+          <button onclick="selectStatus('To Do')" id="btn-ToDo"
+            class="border-2 border-cyan-400 text-cyan-500 rounded-2xl px-5 py-2 font-semibold">
+            To Do
+          </button>
+          <button onclick="selectStatus('Progress')" id="btn-Progress"
+            class="border-2 border-cyan-400 text-cyan-500 rounded-2xl px-5 py-2 font-semibold">
+            Progress
+          </button>
+          <button onclick="selectStatus('Done')" id="btn-Done"
+            class="border-2 border-cyan-400 text-cyan-500 rounded-2xl px-5 py-2 font-semibold">
+            Done
+          </button>
+        </div>
+      </div>
+
+      <div class="flex gap-3 justify-end">
+        <button id="cancelBtn" onclick="closeModal()"
+          class="hidden bg-red-500 text-white font-bold px-8 py-3 rounded-full">
+          Cancel
+        </button>
+        <button id="actionBtn" onclick="saveTask()"
+          class="bg-purple-700 text-white font-bold px-10 py-3 rounded-full">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteModal" class="hidden fixed inset-0 modal-overlay flex items-center justify-center z-50">
+    <div class="bg-white rounded-3xl p-10 w-full max-w-md text-center shadow-xl">
+      <p class="text-red-500 font-bold text-2xl mb-4">Are you sure ?</p>
+      <div class="flex justify-center mb-6">
+        <img class="w-20 h-20" src="warning.png" alt="">
+      </div>
+      <div class="flex gap-4 justify-center">
+        <button onclick="confirmDelete()" class="bg-red-500 text-white font-bold px-8 py-3 rounded-full">Yes</button>
+        <button onclick="closeDeleteModal()" class="bg-blue-500 text-white font-bold px-8 py-3 rounded-full">No</button>
+      </div>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
